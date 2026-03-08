@@ -1,0 +1,85 @@
+<svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <path d="M 2 2 Q 0 0 3 0 L 897 1 Q 900 0 899 3 L 898 547 Q 900 550 897 549 L 3 548 Q 0 550 1 547 Z" fill="#F0F3F5" stroke="#282D37" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="450" y="45" text-anchor="middle" font-family="Comic Neue, Segoe Print, Patrick Hand, cursive" font-size="28" font-weight="bold" fill="#282D37">A2A Agent Platform</text>
+  <text x="450" y="70" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" fill="#646973">Multi-Agent System mit Service Discovery</text>
+
+  <!-- Layer 2: Containers -->
+  <!-- Registry -->
+  <path d="M 340 90 Q 338 88 342 88 L 558 89 Q 562 88 561 92 L 560 148 Q 562 152 558 151 L 342 150 Q 338 152 339 148 Z" fill="#EC0016" stroke="#282D37" stroke-width="2"/>
+  <text x="450" y="115" text-anchor="middle" font-family="Comic Neue, cursive" font-size="16" font-weight="bold" fill="#FFFFFF">Agent Registry</text>
+  <text x="450" y="135" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#FFD0D0">:5010 — Heartbeat + Discovery</text>
+  <!-- IMAGE: server rack with connected nodes -->
+
+  <!-- Monitoring Agent -->
+  <path d="M 50 200 Q 48 198 52 198 L 248 199 Q 252 198 251 202 L 250 328 Q 252 332 248 331 L 52 330 Q 48 332 49 328 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <text x="150" y="225" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#282D37">Monitoring</text>
+  <text x="150" y="245" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#646973">:5000 — kubectl, proxmox</text>
+  <!-- IMAGE: magnifying glass examining server dashboard -->
+
+  <!-- Remediation Agent -->
+  <path d="M 330 200 Q 328 198 332 198 L 568 199 Q 572 198 571 202 L 570 328 Q 572 332 568 331 L 332 330 Q 328 332 329 328 Z" fill="#8C0009" stroke="#282D37" stroke-width="2"/>
+  <text x="450" y="225" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#FFFFFF">Remediation</text>
+  <text x="450" y="245" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#FFD0D0">:5001 — auto-fix, cooldown</text>
+  <!-- IMAGE: wrench fixing a gear -->
+
+  <!-- Reporting Agent -->
+  <path d="M 650 200 Q 648 198 652 198 L 848 199 Q 852 198 851 202 L 850 328 Q 852 332 848 331 L 652 330 Q 648 332 649 328 Z" fill="#DBDFE3" stroke="#282D37" stroke-width="2"/>
+  <text x="750" y="225" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#282D37">Reporting</text>
+  <text x="750" y="245" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#646973">:5002 — Mattermost relay</text>
+  <!-- IMAGE: chat bubble with checkmark -->
+
+  <!-- Layer 3: Connectors -->
+  <!-- Registry to agents -->
+  <path d="M 400 152 C 380 170 200 175 150 198" fill="none" stroke="#EC0016" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <path d="M 450 152 L 450 198" fill="none" stroke="#EC0016" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <path d="M 500 152 C 520 170 700 175 750 198" fill="none" stroke="#EC0016" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+  <!-- Monitoring → Remediation (CRITICAL flow) -->
+  <path d="M 252 265 C 280 265 300 265 328 265" fill="none" stroke="#EC0016" stroke-width="3"/>
+  <text x="290" y="258" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#EC0016" font-weight="bold">CRITICAL</text>
+  <polygon points="328,265 318,259 318,271" fill="#EC0016"/>
+
+  <!-- Remediation → Reporting -->
+  <path d="M 572 265 C 600 265 620 265 648 265" fill="none" stroke="#282D37" stroke-width="3"/>
+  <polygon points="648,265 638,259 638,271" fill="#282D37"/>
+
+  <!-- Scheduler -->
+  <path d="M 150 400 Q 148 398 152 398 L 448 399 Q 452 398 451 402 L 450 498 Q 452 502 448 501 L 152 500 Q 148 502 149 498 Z" fill="#282D37" stroke="#282D37" stroke-width="2"/>
+  <text x="300" y="425" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#FFFFFF">Scheduler</text>
+  <text x="300" y="445" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#B0B4BA">Quick Check 15min | Daily Reports</text>
+  <text x="300" y="465" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#B0B4BA">Alert Deduplication (Grace + Cooldown)</text>
+
+  <!-- Chat Agent -->
+  <path d="M 530 400 Q 528 398 532 398 L 848 399 Q 852 398 851 402 L 850 498 Q 852 502 848 501 L 532 500 Q 528 502 529 498 Z" fill="#878C96" stroke="#282D37" stroke-width="2"/>
+  <text x="690" y="425" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#FFFFFF">Chat Agent</text>
+  <text x="690" y="445" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#E8E9EB">Mattermost + Telegram</text>
+  <text x="690" y="465" text-anchor="middle" font-family="Comic Neue, cursive" font-size="11" fill="#E8E9EB">8 Channels, Session Continuity</text>
+  <!-- IMAGE: person chatting with robot on phone -->
+
+  <!-- Scheduler → Monitoring -->
+  <path d="M 250 398 C 230 370 180 350 160 332" fill="none" stroke="#646973" stroke-width="2.5"/>
+  <polygon points="160,332 155,342 165,342" fill="#646973"/>
+
+  <!-- Scheduler → Reporting -->
+  <path d="M 400 398 C 500 370 650 350 740 332" fill="none" stroke="#646973" stroke-width="2.5"/>
+  <polygon points="740,332 735,342 745,342" fill="#646973"/>
+
+  <!-- Layer 5: Badges -->
+  <rect x="100" y="280" width="100" height="22" rx="11" fill="#EC0016"/>
+  <text x="150" y="295" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="white" font-weight="bold">2 Skills</text>
+
+  <rect x="400" y="280" width="100" height="22" rx="11" fill="#DBDFE3"/>
+  <text x="450" y="295" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#282D37" font-weight="bold">4 Skills</text>
+
+  <rect x="700" y="280" width="100" height="22" rx="11" fill="#282D37"/>
+  <text x="750" y="295" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="white" font-weight="bold">1 Skill</text>
+
+  <!-- Decorations -->
+  <text x="25" y="180" font-size="16">⚡</text>
+  <text x="870" y="180" font-size="16">🔧</text>
+  <text x="870" y="380" font-size="16">💬</text>
+  <text x="25" y="520" font-size="16">⏰</text>
+</svg>

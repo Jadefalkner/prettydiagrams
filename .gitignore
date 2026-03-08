@@ -6,4 +6,5 @@ __pycache__/
 *.jpg
 output/
 data/
-.claude/
+.claude/*
+!.claude/skills/

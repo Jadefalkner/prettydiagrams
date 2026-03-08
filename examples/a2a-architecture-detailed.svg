@@ -1,0 +1,201 @@
+<svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <path d="M 2 2 Q 0 0 3 0 L 897 1 Q 900 0 899 3 L 898 547 Q 900 550 897 549 L 3 548 Q 0 550 1 547 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+
+  <!-- Title Banner -->
+  <path d="M 250 12 Q 248 10 252 10 L 648 11 Q 652 10 651 14 L 650 58 Q 652 62 648 61 L 252 60 Q 248 62 249 58 Z" fill="#EC0016" stroke="#282D37" stroke-width="2"/>
+  <text x="450" y="33" text-anchor="middle" font-family="Comic Neue, Segoe Print, Patrick Hand, cursive" font-size="22" font-weight="bold" fill="#FFFFFF">A2A Agent Platform</text>
+  <text x="450" y="52" text-anchor="middle" font-family="Comic Neue, cursive" font-size="12" fill="#FFD0D0">Multi-Agent System mit Service Discovery + Auto-Remediation</text>
+
+  <!-- Decorative line under title -->
+  <path d="M 100 68 C 200 72 700 64 800 68" fill="none" stroke="#DBDFE3" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Layer 2: Containers -->
+
+  <!-- Registry (top center) -->
+  <path d="M 310 78 Q 308 76 312 76 L 588 77 Q 592 76 591 80 L 590 148 Q 592 152 588 151 L 312 150 Q 308 152 309 148 Z" fill="#DBDFE3" stroke="#282D37" stroke-width="2"/>
+  <text x="450" y="98" text-anchor="middle" font-family="Comic Neue, cursive" font-size="15" font-weight="bold" fill="#282D37">Agent Registry</text>
+  <text x="450" y="114" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#646973">:5010 — Heartbeat + Discovery</text>
+  <!-- Mini server icon -->
+  <path d="M 340 122 L 370 122 L 370 142 L 340 142 Z" fill="none" stroke="#878C96" stroke-width="1.5"/>
+  <line x1="340" y1="128" x2="370" y2="128" stroke="#878C96" stroke-width="1"/>
+  <line x1="340" y1="134" x2="370" y2="134" stroke="#878C96" stroke-width="1"/>
+  <circle cx="365" cy="125" r="1.5" fill="#EC0016"/>
+  <circle cx="365" cy="131" r="1.5" fill="#53D769"/>
+  <circle cx="365" cy="137" r="1.5" fill="#53D769"/>
+  <!-- Heartbeat pulse -->
+  <path d="M 390 132 L 400 132 L 405 122 L 410 142 L 415 132 L 425 132" fill="none" stroke="#EC0016" stroke-width="1.5"/>
+  <text x="520" y="132" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">auto-register</text>
+  <text x="520" y="144" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">every 30s</text>
+  <!-- IMAGE: server rack with blinking status LEDs -->
+
+  <!-- Monitoring Agent (left) -->
+  <path d="M 22 175 Q 20 173 24 173 L 268 174 Q 272 173 271 177 L 270 340 Q 272 344 268 343 L 24 342 Q 20 344 21 340 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <path d="M 22 175 Q 20 173 24 173 L 268 174 Q 272 173 271 177 L 270 200 L 22 200 Z" fill="#282D37"/>
+  <text x="146" y="192" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" font-weight="bold" fill="#FFFFFF">Monitoring</text>
+  <text x="146" y="216" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#646973">:5000 — Health Checks</text>
+  <!-- Mini magnifying glass -->
+  <circle cx="70" cy="250" r="14" fill="none" stroke="#878C96" stroke-width="2"/>
+  <line x1="80" y1="260" x2="90" y2="270" stroke="#878C96" stroke-width="2.5"/>
+  <circle cx="70" cy="250" r="6" fill="none" stroke="#EC0016" stroke-width="1" stroke-dasharray="2,2"/>
+  <!-- Tool labels -->
+  <path d="M 100 235 L 180 235 L 180 252 L 100 252 Z" fill="#F0F3F5" stroke="#DBDFE3" stroke-width="1" rx="3"/>
+  <text x="140" y="247" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#282D37">kubectl get pods</text>
+  <path d="M 100 257 L 180 257 L 180 274 L 100 274 Z" fill="#F0F3F5" stroke="#DBDFE3" stroke-width="1" rx="3"/>
+  <text x="140" y="269" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#282D37">proxmox status</text>
+  <path d="M 100 279 L 180 279 L 180 296 L 100 296 Z" fill="#F0F3F5" stroke="#DBDFE3" stroke-width="1" rx="3"/>
+  <text x="140" y="291" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#282D37">cert expiry</text>
+  <!-- Callout -->
+  <text x="200" y="240" font-family="Comic Neue, cursive" font-size="8" fill="#EC0016" font-weight="bold">every</text>
+  <text x="200" y="250" font-family="Comic Neue, cursive" font-size="8" fill="#EC0016" font-weight="bold">15 min</text>
+  <!-- Annotation arrow -->
+  <path d="M 220 248 C 235 248 245 235 250 225" fill="none" stroke="#EC0016" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- IMAGE: magnifying glass examining a Kubernetes dashboard with pod statuses -->
+
+  <!-- Remediation Agent (center) -->
+  <path d="M 302 175 Q 300 173 304 173 L 596 174 Q 600 173 599 177 L 598 340 Q 600 344 596 343 L 304 342 Q 300 344 301 340 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <path d="M 302 175 Q 300 173 304 173 L 596 174 Q 600 173 599 177 L 598 200 L 302 200 Z" fill="#8C0009"/>
+  <text x="450" y="192" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" font-weight="bold" fill="#FFFFFF">Remediation</text>
+  <text x="450" y="216" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#646973">:5001 — Auto-Fix mit Cooldown</text>
+  <!-- Wrench + gear icon -->
+  <path d="M 330 240 C 325 235 320 240 325 248 L 340 265 C 342 268 346 268 348 265 L 350 260 C 345 255 340 250 335 245" fill="none" stroke="#282D37" stroke-width="2"/>
+  <circle cx="365" cy="250" r="12" fill="none" stroke="#878C96" stroke-width="2"/>
+  <circle cx="365" cy="250" r="4" fill="#878C96"/>
+  <!-- Flow steps -->
+  <text x="400" y="238" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">1.</text>
+  <text x="412" y="238" font-family="Comic Neue, cursive" font-size="9" fill="#646973">claude-rag durchsuchen</text>
+  <text x="400" y="254" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">2.</text>
+  <text x="412" y="254" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Fix ausführen</text>
+  <text x="400" y="270" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">3.</text>
+  <text x="412" y="270" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Validieren</text>
+  <!-- Result badges -->
+  <rect x="390" y="282" width="50" height="16" rx="8" fill="#53D769"/>
+  <text x="415" y="293" text-anchor="middle" font-family="Comic Neue, cursive" font-size="8" fill="white" font-weight="bold">FIXED</text>
+  <rect x="445" y="282" width="50" height="16" rx="8" fill="#EC0016"/>
+  <text x="470" y="293" text-anchor="middle" font-family="Comic Neue, cursive" font-size="8" fill="white" font-weight="bold">FAILED</text>
+  <rect x="500" y="282" width="60" height="16" rx="8" fill="#878C96"/>
+  <text x="530" y="293" text-anchor="middle" font-family="Comic Neue, cursive" font-size="8" fill="white" font-weight="bold">SKIPPED</text>
+  <!-- Cooldown indicator -->
+  <text x="340" y="310" font-family="Comic Neue, cursive" font-size="9" fill="#EC0016">⏱ Cooldown: 1h</text>
+  <text x="340" y="322" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">Grace Period: 15min</text>
+  <!-- IMAGE: robotic arm with wrench repairing a broken server -->
+
+  <!-- Reporting Agent (right) -->
+  <path d="M 630 175 Q 628 173 632 173 L 878 174 Q 882 173 881 177 L 880 340 Q 882 344 878 343 L 632 342 Q 628 344 629 340 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <path d="M 630 175 Q 628 173 632 173 L 878 174 Q 882 173 881 177 L 880 200 L 630 200 Z" fill="#282D37"/>
+  <text x="755" y="192" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" font-weight="bold" fill="#FFFFFF">Reporting</text>
+  <text x="755" y="216" text-anchor="middle" font-family="Comic Neue, cursive" font-size="10" fill="#646973">:5002 — Mattermost Relay</text>
+  <!-- Chat bubble icon -->
+  <path d="M 670 230 L 730 230 Q 735 230 735 235 L 735 260 Q 735 265 730 265 L 695 265 L 685 278 L 685 265 L 670 265 Q 665 265 665 260 L 665 235 Q 665 230 670 230" fill="#DBDFE3" stroke="#282D37" stroke-width="1.5"/>
+  <text x="700" y="245" font-family="Comic Neue, cursive" font-size="8" fill="#282D37">Alert: Pod</text>
+  <text x="700" y="255" font-family="Comic Neue, cursive" font-size="8" fill="#282D37">CrashLoop ✓</text>
+  <!-- Arrow to Mattermost logo area -->
+  <path d="M 750 248 L 780 248" fill="none" stroke="#282D37" stroke-width="1.5"/>
+  <polygon points="780,248 774,244 774,252" fill="#282D37"/>
+  <!-- Mattermost box -->
+  <path d="M 785 232 L 860 232 L 860 268 L 785 268 Z" fill="#F0F3F5" stroke="#DBDFE3" stroke-width="1"/>
+  <text x="822" y="248" text-anchor="middle" font-family="Comic Neue, cursive" font-size="8" fill="#282D37" font-weight="bold">Mattermost</text>
+  <text x="822" y="260" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#878C96">#monitoring</text>
+  <text x="755" y="295" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">ALREADY_REPORTED</text>
+  <text x="755" y="307" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">verhindert Double-Post</text>
+  <!-- IMAGE: chat notification with checkmark flying to a screen -->
+
+  <!-- Layer 3: Connectors -->
+  <!-- Registry to agents (dashed discovery lines) -->
+  <path d="M 380 152 C 350 165 200 168 146 173" fill="none" stroke="#EC0016" stroke-width="2" stroke-dasharray="6,4"/>
+  <path d="M 450 152 L 450 173" fill="none" stroke="#EC0016" stroke-width="2" stroke-dasharray="6,4"/>
+  <path d="M 520 152 C 560 165 680 168 755 173" fill="none" stroke="#EC0016" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Monitoring → Remediation (CRITICAL flow, thick red) -->
+  <path d="M 272 260 C 285 260 290 260 300 260" fill="none" stroke="#EC0016" stroke-width="3"/>
+  <polygon points="300,260 292,255 292,265" fill="#EC0016"/>
+  <!-- CRITICAL label with box -->
+  <rect x="274" y="245" width="22" height="12" rx="3" fill="#EC0016"/>
+  <text x="285" y="254" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="white" font-weight="bold">!</text>
+
+  <!-- Remediation → Reporting -->
+  <path d="M 600 260 C 612 260 618 260 628 260" fill="none" stroke="#282D37" stroke-width="2.5"/>
+  <polygon points="628,260 620,255 620,265" fill="#282D37"/>
+
+  <!-- Scheduler (bottom left) -->
+  <path d="M 22 368 Q 20 366 24 366 L 428 367 Q 432 366 431 370 L 430 530 Q 432 534 428 533 L 24 532 Q 20 534 21 530 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <path d="M 22 368 Q 20 366 24 366 L 428 367 Q 432 366 431 370 L 430 393 L 22 393 Z" fill="#878C96"/>
+  <text x="226" y="385" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" font-weight="bold" fill="#FFFFFF">Scheduler</text>
+  <!-- Clock icon -->
+  <circle cx="60" cy="430" r="16" fill="none" stroke="#282D37" stroke-width="2"/>
+  <line x1="60" y1="430" x2="60" y2="420" stroke="#282D37" stroke-width="2"/>
+  <line x1="60" y1="430" x2="68" y2="434" stroke="#EC0016" stroke-width="1.5"/>
+  <circle cx="60" cy="430" r="2" fill="#EC0016"/>
+  <!-- Schedule table -->
+  <text x="95" y="413" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">Zeitplan:</text>
+  <text x="95" y="427" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Quick Check → alle 15 min</text>
+  <text x="95" y="441" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Daily Report → 07:05</text>
+  <text x="95" y="455" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Backup Report → 07:20</text>
+  <text x="95" y="469" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Renovate Digest → 08:05</text>
+  <!-- Dedup box -->
+  <path d="M 270 405 L 415 405 L 415 470 L 270 470 Z" fill="#F0F3F5" stroke="#DBDFE3" stroke-width="1.5"/>
+  <text x="342" y="420" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">Alert Deduplication</text>
+  <text x="342" y="436" font-family="Comic Neue, cursive" font-size="8" fill="#646973">ALERT_KEY = hash(type+target)</text>
+  <text x="342" y="450" font-family="Comic Neue, cursive" font-size="8" fill="#646973">Grace: 15min → Cooldown: 1h</text>
+  <text x="342" y="464" font-family="Comic Neue, cursive" font-size="8" fill="#EC0016">ALL_CLEAR → skip post</text>
+  <!-- IMAGE: calendar with clock and checkmarks -->
+
+  <!-- Chat Agent (bottom right) -->
+  <path d="M 462 368 Q 460 366 464 366 L 878 367 Q 882 366 881 370 L 880 530 Q 882 534 878 533 L 464 532 Q 460 534 461 530 Z" fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+  <path d="M 462 368 Q 460 366 464 366 L 878 367 Q 882 366 881 370 L 880 393 L 462 393 Z" fill="#EC0016"/>
+  <text x="670" y="385" text-anchor="middle" font-family="Comic Neue, cursive" font-size="14" font-weight="bold" fill="#FFFFFF">Chat Agent</text>
+  <!-- Platform icons -->
+  <text x="490" y="415" font-family="Comic Neue, cursive" font-size="10" fill="#282D37" font-weight="bold">Mattermost</text>
+  <text x="490" y="428" font-family="Comic Neue, cursive" font-size="9" fill="#646973">WebSocket</text>
+  <text x="600" y="415" font-family="Comic Neue, cursive" font-size="10" fill="#282D37" font-weight="bold">Telegram</text>
+  <text x="600" y="428" font-family="Comic Neue, cursive" font-size="9" fill="#646973">Long Polling</text>
+  <!-- Channel grid -->
+  <rect x="480" y="440" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="517" y="452" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#monitoring</text>
+  <rect x="560" y="440" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="597" y="452" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#homelab</text>
+  <rect x="640" y="440" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="677" y="452" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#reports</text>
+  <rect x="720" y="440" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="757" y="452" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#diagrams</text>
+  <rect x="480" y="460" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="517" y="472" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#discussions</text>
+  <rect x="560" y="460" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="597" y="472" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#backup</text>
+  <rect x="640" y="460" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="677" y="472" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#renovate</text>
+  <rect x="720" y="460" width="75" height="16" rx="4" fill="#DBDFE3"/>
+  <text x="757" y="472" text-anchor="middle" font-family="Comic Neue, cursive" font-size="7" fill="#282D37">#links</text>
+  <!-- Session continuity note -->
+  <text x="600" y="500" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">claude --resume → Session Continuity</text>
+  <text x="600" y="514" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#878C96">Antworten direkt im Channel, keine Threads</text>
+  <!-- IMAGE: person chatting with a friendly robot on multiple screens -->
+
+  <!-- Scheduler → Monitoring -->
+  <path d="M 146 366 C 146 355 146 350 146 343" fill="none" stroke="#646973" stroke-width="2"/>
+  <polygon points="146,343 141,351 151,351" fill="#646973"/>
+
+  <!-- Scheduler → Reporting -->
+  <path d="M 400 366 C 500 355 650 350 755 343" fill="none" stroke="#646973" stroke-width="2"/>
+  <polygon points="755,343 749,351 761,351" fill="#646973"/>
+
+  <!-- Layer 5: Badges -->
+  <rect x="80" y="315" width="80" height="18" rx="9" fill="#EC0016"/>
+  <text x="120" y="328" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="white" font-weight="bold">2 Skills</text>
+
+  <rect x="410" y="315" width="80" height="18" rx="9" fill="#282D37"/>
+  <text x="450" y="328" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="white" font-weight="bold">4 Skills</text>
+
+  <rect x="710" y="315" width="80" height="18" rx="9" fill="#DBDFE3"/>
+  <text x="750" y="328" text-anchor="middle" font-family="Comic Neue, cursive" font-size="9" fill="#282D37" font-weight="bold">1 Skill</text>
+
+  <!-- Layer 6: Decorations -->
+  <!-- Small stars -->
+  <text x="8" y="165" font-size="12">⚡</text>
+  <text x="885" y="165" font-size="12">🔧</text>
+  <text x="885" y="360" font-size="12">💬</text>
+  <text x="8" y="540" font-size="12">⏰</text>
+  <text x="445" y="545" font-size="10">✨</text>
+  <!-- Squiggly separator -->
+  <path d="M 30 355 C 60 350 90 360 120 355 C 150 350 180 360 210 355 C 240 350 270 360 300 355 C 330 350 360 360 390 355 C 420 350 450 360 480 355 C 510 350 540 360 570 355 C 600 350 630 360 660 355 C 690 350 720 360 750 355 C 780 350 810 360 840 355 C 855 352 870 358 870 355" fill="none" stroke="#DBDFE3" stroke-width="1.5"/>
+</svg>

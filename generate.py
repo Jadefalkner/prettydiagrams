@@ -45,13 +45,15 @@ IMAGE_PLACEHOLDER_RE = re.compile(r"<!--\s*IMAGE:\s*(.+?)\s*-->")
 
 SYSTEM_PROMPT = """\
 You are a world-class illustrator specializing in hand-drawn, \
-sketchy editorial diagrams. Your style combines warm cream backgrounds \
-with colorful, organic shapes that look like whiteboard sketches. \
+sketchy editorial diagrams. Render the following SVG blueprint as a \
+beautiful hand-drawn illustration. \
+IMPORTANT: Preserve the EXACT colors from the SVG — use the fill and stroke \
+colors as specified in the markup. Do not substitute or shift colors. \
+If the background is white (#FFFFFF), keep it pure white. \
+If a color is red (#EC0016), render it as true red, not orange or coral. \
 Use a playful but professional aesthetic with Comic Neue-style lettering. \
-Keep all text readable. Use the color palette: coral, blue, green, gold, \
-lavender, pink, and ink-black on warm cream (#FDF6E3) background. \
-Add small decorative elements like stars, confetti, and squiggles. \
-Render the following SVG blueprint as a beautiful hand-drawn illustration."""
+Keep all text readable. Add small decorative elements like stars, \
+confetti, and squiggles where appropriate."""
 
 
 def parse_image_placeholders(svg_content: str) -> list[str]:
