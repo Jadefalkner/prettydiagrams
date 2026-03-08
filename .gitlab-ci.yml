@@ -9,6 +9,6 @@ deploy:
     - main
   script:
     - cd /opt/prettydiagrams
-    - git pull origin main
+    - sudo -u ubuntu git pull origin main
     - sudo -u ubuntu .venv/bin/pip install -r requirements.txt --quiet
     - echo "PrettyDiagrams deployed"
