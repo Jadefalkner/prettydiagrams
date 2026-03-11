@@ -1,0 +1,179 @@
+<svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <path d="M 3 3 Q 450 1 897 4 Q 899 275 896 547 Q 450 549 4 546 Q 1 275 3 3 Z"
+        fill="#FFFFFF" stroke="#282D37" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="450" y="42" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="28" font-weight="bold" fill="#282D37">How to Create a PrettyDiagram</text>
+  <text x="450" y="62" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="13" fill="#646973">From idea to hand-drawn illustration in 4 steps</text>
+
+  <!-- Layer 2: Containers -->
+
+  <!-- Step 1: Describe -->
+  <path d="M 22 88 Q 222 86 222 88 Q 224 168 222 248 Q 122 250 22 248 Q 20 168 22 88 Z"
+        fill="#DBDFE3" stroke="#282D37" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="122" y="116" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="18" font-weight="bold" fill="#282D37">1. Describe</text>
+  <text x="122" y="140" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">"Draw me an architecture</text>
+  <text x="122" y="155" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">diagram of my K8s cluster"</text>
+  <!-- Mini chat bubble -->
+  <path d="M 72 178 Q 72 170 122 170 Q 172 170 172 178 Q 172 195 122 195 Q 92 195 82 205 Q 82 195 72 195 Q 72 186 72 178 Z"
+        fill="#EC0016" opacity="0.15" stroke="#EC0016" stroke-width="1"/>
+  <text x="122" y="187" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#EC0016">your prompt here</text>
+
+  <!-- Step 2: Plan -->
+  <path d="M 248 88 Q 448 85 448 88 Q 450 168 448 248 Q 348 251 248 248 Q 246 168 248 88 Z"
+        fill="#FFFFFF" stroke="#EC0016" stroke-width="2" stroke-linejoin="round"/>
+  <text x="348" y="116" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="18" font-weight="bold" fill="#EC0016">2. Plan</text>
+  <text x="348" y="140" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">Color scheme: red-white</text>
+  <text x="348" y="155" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">Detail level: standard</text>
+  <text x="348" y="170" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">Layout: Flow</text>
+  <text x="348" y="185" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#646973">Components: 4-8</text>
+  <!-- Approval badge -->
+  <rect x="310" y="205" width="76" height="22" rx="11" fill="#EC0016"/>
+  <text x="348" y="220" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" font-weight="bold" fill="#FFFFFF">✓ Approve</text>
+
+  <!-- Step 3: SVG Blueprint -->
+  <path d="M 474 88 Q 674 86 674 88 Q 676 168 674 248 Q 574 250 474 248 Q 472 168 474 88 Z"
+        fill="#FFFFFF" stroke="#282D37" stroke-width="2" stroke-linejoin="round"/>
+  <text x="574" y="116" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="18" font-weight="bold" fill="#282D37">3. SVG Blueprint</text>
+  <!-- Mini SVG preview -->
+  <rect x="504" y="132" width="140" height="85" rx="4" fill="#F0F3F5" stroke="#878C96" stroke-width="1"/>
+  <text x="514" y="148" font-family="monospace" font-size="8" fill="#282D37">&lt;svg viewBox="0 0 900</text>
+  <text x="514" y="160" font-family="monospace" font-size="8" fill="#878C96">  &lt;!-- 6 layers --&gt;</text>
+  <text x="514" y="172" font-family="monospace" font-size="8" fill="#878C96">  &lt;path d="M 10 10</text>
+  <text x="514" y="184" font-family="monospace" font-size="8" fill="#EC0016">  &lt;!-- wobble! --&gt;</text>
+  <text x="514" y="196" font-family="monospace" font-size="8" fill="#878C96">  &lt;text&gt;Labels&lt;/text&gt;</text>
+  <text x="514" y="208" font-family="monospace" font-size="8" fill="#282D37">&lt;/svg&gt;</text>
+  <!-- 6 layers badge -->
+  <rect x="530" y="222" width="88" height="20" rx="10" fill="#282D37"/>
+  <text x="574" y="236" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="9" font-weight="bold" fill="#FFFFFF">6 Layer System</text>
+
+  <!-- Step 4: Render -->
+  <path d="M 700 88 Q 880 85 878 88 Q 880 168 878 248 Q 789 251 700 248 Q 698 168 700 88 Z"
+        fill="#EC0016" stroke="#8C0009" stroke-width="2" stroke-linejoin="round"/>
+  <text x="789" y="116" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="18" font-weight="bold" fill="#FFFFFF">4. Render</text>
+  <!-- Mini image frame -->
+  <rect x="734" y="132" width="110" height="75" rx="4" fill="#FFFFFF" stroke="#8C0009" stroke-width="1"/>
+  <text x="789" y="158" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="24">🎨</text>
+  <text x="789" y="180" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#8C0009">Nano Banana Pro</text>
+  <text x="789" y="195" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="9" fill="#878C96">hand-drawn PNG</text>
+  <!-- 2K badge -->
+  <rect x="755" y="215" width="68" height="20" rx="10" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0"/>
+  <text x="789" y="230" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" font-weight="bold" fill="#FFFFFF">2K default</text>
+
+  <!-- Layer 3: Connectors -->
+
+  <!-- Step 1 → 2 -->
+  <path d="M 224 168 C 236 168 236 168 248 168" fill="none" stroke="#EC0016" stroke-width="2"/>
+  <polygon points="248,168 240,163 240,173" fill="#EC0016"/>
+
+  <!-- Step 2 → 3 -->
+  <path d="M 450 168 C 462 168 462 168 474 168" fill="none" stroke="#282D37" stroke-width="2"/>
+  <polygon points="474,168 466,163 466,173" fill="#282D37"/>
+
+  <!-- Step 3 → 4 -->
+  <path d="M 676 168 C 688 168 688 168 700 168" fill="none" stroke="#EC0016" stroke-width="2"/>
+  <polygon points="700,168 692,163 692,173" fill="#EC0016"/>
+
+  <!-- Bottom section: Features -->
+
+  <!-- Color Schemes box -->
+  <path d="M 22 280 Q 292 278 292 280 Q 294 380 292 480 Q 157 482 22 480 Q 20 380 22 280 Z"
+        fill="#F0F3F5" stroke="#282D37" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="157" y="306" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="16" font-weight="bold" fill="#282D37">5 Color Schemes</text>
+  <!-- Color swatches -->
+  <rect x="42" y="320" width="30" height="20" rx="4" fill="#EC0016" stroke="#282D37" stroke-width="0.5"/>
+  <text x="80" y="335" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#282D37">red-white (default)</text>
+  <rect x="42" y="346" width="30" height="20" rx="4" fill="#EC0016" stroke="#282D37" stroke-width="0.5"/>
+  <rect x="42" y="346" width="15" height="20" rx="4" fill="#F0F3F5" stroke="#282D37" stroke-width="0.5"/>
+  <text x="80" y="361" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#282D37">red</text>
+  <rect x="42" y="372" width="30" height="20" rx="4" fill="#E8927C" stroke="#333" stroke-width="0.5"/>
+  <text x="80" y="387" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#282D37">warm</text>
+  <rect x="42" y="398" width="30" height="20" rx="4" fill="#2C3E6B" stroke="#2C3E6B" stroke-width="0.5"/>
+  <text x="80" y="413" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#282D37">ocean</text>
+  <rect x="42" y="424" width="30" height="20" rx="4" fill="#1A1A2E" stroke="#4A4A6A" stroke-width="0.5"/>
+  <text x="80" y="439" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#282D37">neon</text>
+  <!-- Deko -->
+  <text x="220" y="350" font-family="Comic Neue, Patrick Hand, cursive" font-size="36" opacity="0.15">🎨</text>
+
+  <!-- Backends box -->
+  <path d="M 312 280 Q 588 277 588 280 Q 590 380 588 480 Q 450 483 312 480 Q 310 380 312 280 Z"
+        fill="#FFFFFF" stroke="#EC0016" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="450" y="306" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="16" font-weight="bold" fill="#EC0016">2 Backends</text>
+  <!-- Kie.ai -->
+  <rect x="332" y="322" width="108" height="60" rx="8" fill="#DBDFE3" stroke="#282D37" stroke-width="1"/>
+  <text x="386" y="346" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="13" font-weight="bold" fill="#282D37">Kie.ai</text>
+  <text x="386" y="362" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#646973">18 credits / img</text>
+  <text x="386" y="375" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#646973">~$0.09</text>
+  <!-- Google -->
+  <rect x="460" y="322" width="108" height="60" rx="8" fill="#DBDFE3" stroke="#282D37" stroke-width="1"/>
+  <text x="514" y="346" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="13" font-weight="bold" fill="#282D37">Google Gemini</text>
+  <text x="514" y="362" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#646973">same model direct</text>
+  <text x="514" y="375" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#646973">free tier avail.</text>
+  <!-- Same model note -->
+  <path d="M 440 382 C 440 410 460 410 460 382" fill="none" stroke="#878C96" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="450" y="425" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" fill="#878C96">same model:</text>
+  <text x="450" y="438" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="10" font-weight="bold" fill="#EC0016">Nano Banana Pro</text>
+  <!-- Install command -->
+  <rect x="340" y="452" width="220" height="22" rx="6" fill="#282D37"/>
+  <text x="450" y="467" text-anchor="middle" font-family="monospace"
+        font-size="8" fill="#FFFFFF">/plugin install prettydiagrams</text>
+
+  <!-- SVG Rules box -->
+  <path d="M 608 280 Q 878 277 878 280 Q 880 380 878 480 Q 743 483 608 480 Q 606 380 608 280 Z"
+        fill="#FFFFFF" stroke="#282D37" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="743" y="306" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="16" font-weight="bold" fill="#282D37">SVG Rules</text>
+  <text x="628" y="330" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ ViewBox 0 0 900 550</text>
+  <text x="628" y="348" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ 6 layers (bottom → top)</text>
+  <text x="628" y="366" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ Only &lt;path&gt;, no &lt;rect&gt;</text>
+  <text x="628" y="384" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ 1-3px wobble = hand-drawn</text>
+  <text x="628" y="402" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ Bezier arrows + polygons</text>
+  <text x="628" y="420" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ Max 8 containers</text>
+  <text x="628" y="438" font-family="Comic Neue, Patrick Hand, cursive" font-size="11" fill="#646973">✦ Max 6 IMAGE placeholders</text>
+  <!-- QA badge -->
+  <rect x="700" y="452" width="86" height="20" rx="10" fill="#EC0016"/>
+  <text x="743" y="466" text-anchor="middle" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="9" font-weight="bold" fill="#FFFFFF">QA Checklist ✓</text>
+
+  <!-- Layer 6: Decorations -->
+  <text x="16" y="536" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="11" fill="#878C96">github.com/Jadefalkner/prettydiagrams</text>
+  <text x="870" y="536" text-anchor="end" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="20" opacity="0.3">⚡</text>
+  <text x="840" y="536" text-anchor="end" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="20" opacity="0.3">✨</text>
+  <text x="235" y="265" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="14" opacity="0.2">✏️</text>
+  <text x="460" y="265" font-family="Comic Neue, Patrick Hand, cursive"
+        font-size="14" opacity="0.2">📐</text>
+</svg>
