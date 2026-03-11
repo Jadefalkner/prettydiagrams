@@ -12,7 +12,16 @@ description: >
 
 Generiert handgezeichnete Sketchnote-Illustrationen aus Textbeschreibungen.
 
-Base directory: /home/jadefalkner/work/prettydiagrams
+Plugin root: `${CLAUDE_PLUGIN_ROOT}`
+
+## Setup (einmalig)
+
+Falls noch kein venv vorhanden, Setup ausführen:
+
+```bash
+cd "${CLAUDE_PLUGIN_ROOT}"
+bash scripts/setup.sh
+```
 
 ## Workflow
 
@@ -50,7 +59,7 @@ Nach Freigabe: Generiere das SVG nach den Regeln in `references/svg-rules.md`.
 
 Lies die Regeln:
 ```
-Read references/svg-rules.md
+Read ${CLAUDE_PLUGIN_ROOT}/skills/prettydiagram/references/svg-rules.md
 ```
 
 Wichtig:
@@ -59,32 +68,33 @@ Wichtig:
 - 6 Layer einhalten
 - QA: Prüfe auf Overlaps, Spacing, Lesbarkeit
 
-Speichere das SVG unter `examples/<titel-slug>.svg`.
+Speichere das SVG unter `${CLAUDE_PLUGIN_ROOT}/examples/<titel-slug>.svg`.
 
-### Schritt 3: Rendering via Kie.ai
+### Schritt 3: Rendering
 
 Führe aus:
 
 ```bash
-cd /home/jadefalkner/work/prettydiagrams
-source .venv/bin/activate 2>/dev/null || true
+cd "${CLAUDE_PLUGIN_ROOT}"
+source .venv/bin/activate 2>/dev/null || bash scripts/setup.sh
 python generate.py --svg examples/<titel-slug>.svg -o output/<titel-slug>.png
 ```
 
-Default: 2K Auflösung.
+Default: 2K Auflösung, Kie.ai Backend. Für Gemini: `--backend gemini`.
 
 ### Schritt 4: Ergebnis zeigen
 
 Öffne das generierte Bild:
 
 ```bash
-xdg-open output/<titel-slug>.png
+xdg-open "${CLAUDE_PLUGIN_ROOT}/output/<titel-slug>.png"
 ```
 
 Teile dem User den Pfad mit und frage ob Anpassungen gewünscht sind.
 
 ## Voraussetzungen
 
-- `KIE_API_KEY` in `/home/jadefalkner/work/prettydiagrams/.env`
+- `KIE_API_KEY` oder `GEMINI_API_KEY` in `${CLAUDE_PLUGIN_ROOT}/.env`
+- `PRETTYDIAGRAMS_BACKEND` optional (default: kie)
 - `TAVILY_API_KEY` optional (für Referenzbilder aus IMAGE Placeholders)
-- Python-Deps: `httpx`, `python-dotenv`
+- Python 3.11+ (Setup-Script erledigt den Rest)

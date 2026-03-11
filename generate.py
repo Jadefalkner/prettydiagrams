@@ -4,9 +4,10 @@
 Pipeline:
 1. SVG Blueprint lesen (oder via --prompt generieren lassen)
 2. IMAGE Placeholders parsen und via Tavily auflösen
-3. Multipart-Request an Kie.ai Nano Banana Pro
+3. Rendering via Kie.ai (nano-banana-pro) oder Google Gemini
 4. PNG speichern
 
+Backends: kie (async polling), gemini (synchron).
 Basiert auf Tyler Germain's Graphics-Diagram Konzept.
 """
 
@@ -19,6 +20,7 @@ import re
 import sys
 import time
 from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 
 import httpx
 from dotenv import load_dotenv
@@ -35,6 +37,10 @@ logger = logging.getLogger(__name__)
 KIE_API_URL = "https://api.kie.ai/api/v1/jobs/createTask"
 KIE_POLL_URL = "https://api.kie.ai/api/v1/jobs/recordInfo"
 KIE_API_KEY = os.environ.get("KIE_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3-pro-image-preview")
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+PRETTYDIAGRAMS_BACKEND = os.environ.get("PRETTYDIAGRAMS_BACKEND", "kie")
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY", "")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
 
@@ -69,7 +75,7 @@ def parse_image_placeholders(svg_content: str) -> list[str]:
 def search_images_tavily(queries: list[str]) -> list[dict]:
     """Sucht Referenzbilder via Tavily Image Search API.
 
-    Returns: Liste von {query, url, description} Dicts.
+    Returns: Liste von {query, url} Dicts.
     """
     if not TAVILY_API_KEY:
         logger.info("Kein TAVILY_API_KEY — überspringe Bildersuche")
@@ -119,7 +125,7 @@ def download_image(url: str) -> bytes | None:
 
 
 def build_prompt(svg_content: str, extra_prompt: str | None = None) -> str:
-    """Baut den vollständigen Prompt für Kie.ai."""
+    """Baut den vollständigen Prompt."""
     parts = [SYSTEM_PROMPT]
     if extra_prompt:
         parts.append(f"\nAdditional context: {extra_prompt}")
@@ -178,6 +184,78 @@ def submit_to_kie(
                 return None
     except Exception as e:
         logger.error("Kie.ai Request fehlgeschlagen: %s", e)
+        return None
+
+
+def submit_to_gemini(
+    prompt: str,
+    reference_images: list[bytes] | None = None,
+    aspect_ratio: str = "16:9",
+    resolution: str = "2K",
+) -> bytes | None:
+    """Sendet den Rendering-Auftrag an Google Gemini. Synchron — gibt PNG-Bytes zurück."""
+    if not GEMINI_API_KEY:
+        logger.error("GEMINI_API_KEY nicht gesetzt!")
+        return None
+
+    # Prompt als Text-Part
+    parts: list[dict] = [{"text": prompt}]
+
+    # Referenzbilder als inline_data Parts
+    if reference_images:
+        for img_bytes in reference_images:
+            b64 = base64.b64encode(img_bytes).decode()
+            parts.append({
+                "inline_data": {
+                    "mime_type": "image/png",
+                    "data": b64,
+                },
+            })
+
+    payload = {
+        "contents": [{"parts": parts}],
+        "generationConfig": {
+            "responseModalities": ["TEXT", "IMAGE"],
+            "imageConfig": {
+                "aspectRatio": aspect_ratio,
+                "imageSize": resolution,
+            },
+        },
+    }
+
+    url = f"{GEMINI_API_URL}/{GEMINI_MODEL}:generateContent"
+
+    try:
+        with httpx.Client(timeout=120) as client:
+            resp = client.post(
+                url,
+                params={"key": GEMINI_API_KEY},
+                json=payload,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            # Bild aus Response extrahieren
+            candidates = data.get("candidates", [])
+            if not candidates:
+                logger.error("Gemini: Keine Candidates in Response")
+                return None
+
+            for part in candidates[0].get("content", {}).get("parts", []):
+                inline = part.get("inlineData") or part.get("inline_data")
+                if inline and inline.get("data"):
+                    img_bytes = base64.b64decode(inline["data"])
+                    logger.info("Gemini: Bild erhalten (%.1f KB)", len(img_bytes) / 1024)
+                    return img_bytes
+
+            logger.error("Gemini: Kein Bild in Response gefunden")
+            return None
+
+    except httpx.HTTPStatusError as e:
+        logger.error("Gemini API Fehler %d: %s", e.response.status_code, e.response.text[:500])
+        return None
+    except Exception as e:
+        logger.error("Gemini Request fehlgeschlagen: %s", e)
         return None
 
 
@@ -244,8 +322,11 @@ def generate(
     aspect_ratio: str = "16:9",
     resolution: str = "2K",
     no_images: bool = False,
+    backend: str | None = None,
 ) -> bool:
-    """Komplette Pipeline: SVG → Tavily → Kie.ai → PNG."""
+    """Komplette Pipeline: SVG → Tavily → Kie.ai/Gemini → PNG."""
+    backend = backend or PRETTYDIAGRAMS_BACKEND
+    logger.info("Backend: %s", backend)
 
     # 1. Image Placeholders auflösen
     reference_images = []
@@ -263,23 +344,36 @@ def generate(
     prompt = build_prompt(svg_content, extra_prompt)
     logger.info("Prompt: %d Zeichen, %d Referenzbilder", len(prompt), len(reference_images))
 
-    # 3. An Kie.ai senden
-    task_id = submit_to_kie(
-        prompt=prompt,
-        reference_images=reference_images,
-        aspect_ratio=aspect_ratio,
-        resolution=resolution,
-    )
-    if not task_id:
+    # 3. Rendering
+    if backend == "gemini":
+        img_bytes = submit_to_gemini(
+            prompt=prompt,
+            reference_images=reference_images,
+            aspect_ratio=aspect_ratio,
+            resolution=resolution,
+        )
+        if not img_bytes:
+            return False
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_bytes(img_bytes)
+        logger.info("Gespeichert: %s (%.1f KB)", output_path, len(img_bytes) / 1024)
+        return True
+    elif backend == "kie":
+        task_id = submit_to_kie(
+            prompt=prompt,
+            reference_images=reference_images,
+            aspect_ratio=aspect_ratio,
+            resolution=resolution,
+        )
+        if not task_id:
+            return False
+        result_url = poll_result(task_id)
+        if not result_url:
+            return False
+        return download_result(result_url, output_path)
+    else:
+        logger.error("Unbekanntes Backend: %s (erlaubt: kie, gemini)", backend)
         return False
-
-    # 4. Ergebnis abholen
-    result_url = poll_result(task_id)
-    if not result_url:
-        return False
-
-    # 5. Herunterladen
-    return download_result(result_url, output_path)
 
 
 def main():
@@ -289,6 +383,7 @@ def main():
     parser.add_argument("-o", "--output", type=str, default="output/diagram.png", help="Output-Pfad (default: output/diagram.png)")
     parser.add_argument("--aspect-ratio", type=str, default="16:9", help="Seitenverhältnis (default: 16:9)")
     parser.add_argument("--resolution", type=str, default="2K", choices=["1K", "2K", "4K"], help="Auflösung (default: 2K)")
+    parser.add_argument("--backend", type=str, choices=["kie", "gemini"], help="Rendering-Backend (default: PRETTYDIAGRAMS_BACKEND oder kie)")
     parser.add_argument("--no-images", action="store_true", help="Keine Tavily-Bildersuche")
     args = parser.parse_args()
 
@@ -306,7 +401,7 @@ def main():
         svg_content = f"""\
 <svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
   <!-- Placeholder SVG — Nano Banana Pro will generate from prompt -->
-  <text x="450" y="275" text-anchor="middle" font-size="24">{args.prompt}</text>
+  <text x="450" y="275" text-anchor="middle" font-size="24">{xml_escape(args.prompt)}</text>
 </svg>"""
 
     output_path = Path(args.output)
@@ -318,6 +413,7 @@ def main():
         aspect_ratio=args.aspect_ratio,
         resolution=args.resolution,
         no_images=args.no_images,
+        backend=args.backend,
     )
 
     if success:
