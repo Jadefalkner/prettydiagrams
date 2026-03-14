@@ -344,36 +344,51 @@ def generate(
     prompt = build_prompt(svg_content, extra_prompt)
     logger.info("Prompt: %d Zeichen, %d Referenzbilder", len(prompt), len(reference_images))
 
-    # 3. Rendering
-    if backend == "gemini":
-        img_bytes = submit_to_gemini(
-            prompt=prompt,
-            reference_images=reference_images,
-            aspect_ratio=aspect_ratio,
-            resolution=resolution,
-        )
-        if not img_bytes:
-            return False
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_bytes(img_bytes)
-        logger.info("Gespeichert: %s (%.1f KB)", output_path, len(img_bytes) / 1024)
-        return True
-    elif backend == "kie":
-        task_id = submit_to_kie(
-            prompt=prompt,
-            reference_images=reference_images,
-            aspect_ratio=aspect_ratio,
-            resolution=resolution,
-        )
-        if not task_id:
-            return False
-        result_url = poll_result(task_id)
-        if not result_url:
-            return False
-        return download_result(result_url, output_path)
-    else:
-        logger.error("Unbekanntes Backend: %s (erlaubt: kie, gemini)", backend)
-        return False
+    # 3. Rendering (primary backend with fallback)
+    backends = [backend]
+    fallback = "kie" if backend == "gemini" else "gemini"
+    fallback_key = KIE_API_KEY if fallback == "kie" else GEMINI_API_KEY
+    if fallback_key:
+        backends.append(fallback)
+
+    for attempt_backend in backends:
+        logger.info("Versuche Backend: %s", attempt_backend)
+
+        if attempt_backend == "gemini":
+            img_bytes = submit_to_gemini(
+                prompt=prompt,
+                reference_images=reference_images,
+                aspect_ratio=aspect_ratio,
+                resolution=resolution,
+            )
+            if img_bytes:
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_bytes(img_bytes)
+                logger.info("Gespeichert: %s (%.1f KB)", output_path, len(img_bytes) / 1024)
+                return True
+            logger.warning("Gemini fehlgeschlagen")
+
+        elif attempt_backend == "kie":
+            task_id = submit_to_kie(
+                prompt=prompt,
+                reference_images=reference_images,
+                aspect_ratio=aspect_ratio,
+                resolution=resolution,
+            )
+            if task_id:
+                result_url = poll_result(task_id)
+                if result_url and download_result(result_url, output_path):
+                    return True
+            logger.warning("Kie.ai fehlgeschlagen")
+
+        else:
+            logger.error("Unbekanntes Backend: %s (erlaubt: kie, gemini)", attempt_backend)
+
+        if attempt_backend != backends[-1]:
+            logger.info("Fallback auf %s...", backends[backends.index(attempt_backend) + 1])
+
+    logger.error("Alle Backends fehlgeschlagen")
+    return False
 
 
 def main():
