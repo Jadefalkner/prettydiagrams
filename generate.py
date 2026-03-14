@@ -49,17 +49,56 @@ POLL_TIMEOUT = 600  # 10 Minuten max
 
 IMAGE_PLACEHOLDER_RE = re.compile(r"<!--\s*IMAGE:\s*(.+?)\s*-->")
 
-SYSTEM_PROMPT = """\
-You are a world-class illustrator specializing in hand-drawn, \
-sketchy editorial diagrams. Render the following SVG blueprint as a \
-beautiful hand-drawn illustration. \
-IMPORTANT: Preserve the EXACT colors from the SVG — use the fill and stroke \
-colors as specified in the markup. Do not substitute or shift colors. \
-If the background is white (#FFFFFF), keep it pure white. \
-If a color is red (#EC0016), render it as true red, not orange or coral. \
-Use a playful but professional aesthetic with Comic Neue-style lettering. \
-Keep all text readable. Add small decorative elements like stars, \
-confetti, and squiggles where appropriate."""
+STYLE_PROMPTS = {
+    "sketchnote": (
+        "You are a world-class illustrator specializing in hand-drawn, "
+        "sketchy editorial diagrams. Render the following SVG blueprint as a "
+        "beautiful hand-drawn illustration. "
+        "IMPORTANT: Preserve the EXACT colors from the SVG \u2014 use the fill and stroke "
+        "colors as specified in the markup. Do not substitute or shift colors. "
+        "If the background is white (#FFFFFF), keep it pure white. "
+        "If a color is red (#EC0016), render it as true red, not orange or coral. "
+        "Use a playful but professional aesthetic with Comic Neue-style lettering. "
+        "Keep all text readable. Add small decorative elements like stars, "
+        "confetti, and squiggles where appropriate."
+    ),
+    "comic": (
+        "You are a comic book artist. Create a fun comic-style illustration. "
+        "Use bold outlines, exaggerated proportions, dynamic poses, and speech bubbles "
+        "where appropriate. The style should be playful and humorous \u2014 think webcomic "
+        "or cartoon. Keep all text readable with a comic book font style."
+    ),
+    "info": (
+        "You are a professional graphic designer. Create a clean, modern info card "
+        "or announcement graphic. Use a bold headline, clear typography, and a "
+        "structured layout with visual hierarchy. The design should look like a "
+        "polished social media announcement or internal team update. "
+        "Keep it professional and readable."
+    ),
+    "manga": (
+        "You are a manga artist. Create an illustration in Japanese manga style. "
+        "Use characteristic manga techniques: speed lines, dramatic angles, "
+        "expressive eyes, screen tones, and dynamic compositions. "
+        "Characters should have typical manga proportions. "
+        "Keep text readable with a manga-appropriate font style."
+    ),
+    "cyberpunk": (
+        "You are a cyberpunk digital artist. Create an illustration with a dark, "
+        "futuristic cyberpunk aesthetic. Include glitch effects, holographic elements, "
+        "circuit patterns, and a gritty urban tech atmosphere. "
+        "Keep text readable with a monospace or futuristic font style."
+    ),
+}
+
+# Default-Farben pro Style — nur angewendet wenn der User keine Farben im Prompt nennt
+STYLE_COLOR_DEFAULTS = {
+    "comic": "Use vibrant colors and expressive characters.",
+    "info": "Use subtle gradients or flat colors.",
+    "manga": "Use soft watercolor tones.",
+    "cyberpunk": "Use neon colors (hot pink, cyan, electric blue) on dark backgrounds.",
+}
+
+DEFAULT_STYLE = "sketchnote"
 
 
 def parse_image_placeholders(svg_content: str) -> list[str]:
@@ -124,14 +163,31 @@ def download_image(url: str) -> bytes | None:
         return None
 
 
-def build_prompt(svg_content: str, extra_prompt: str | None = None) -> str:
-    """Baut den vollständigen Prompt."""
-    parts = [SYSTEM_PROMPT]
+COLOR_KEYWORDS = {"black", "white", "red", "blue", "green", "yellow", "pink",
+                  "cyan", "neon", "dark", "bright", "pastel", "monochrome",
+                  "colorful", "grayscale", "sepia", "color", "colour", "schwarz",
+                  "weiss", "bunt", "farbig", "dunkel", "hell"}
+
+
+def build_prompt(
+    svg_content: str | None = None,
+    extra_prompt: str | None = None,
+    style: str = DEFAULT_STYLE,
+) -> str:
+    """Baut den vollständigen Prompt basierend auf Style-Preset."""
+    system_prompt = STYLE_PROMPTS.get(style, STYLE_PROMPTS[DEFAULT_STYLE])
+    parts = [system_prompt]
+
+    # Farb-Default nur wenn User keine Farbangabe macht
+    user_words = set((extra_prompt or '').lower().split())
+    if not user_words & COLOR_KEYWORDS and style in STYLE_COLOR_DEFAULTS:
+        parts.append(STYLE_COLOR_DEFAULTS[style])
+
     if extra_prompt:
         parts.append(f"\nAdditional context: {extra_prompt}")
-    parts.append(f"\n\n--- SVG BLUEPRINT ---\n{svg_content}")
+    if svg_content:
+        parts.append(f"\n\n--- SVG BLUEPRINT ---\n{svg_content}")
     return "\n".join(parts)
-
 
 def submit_to_kie(
     prompt: str,
@@ -323,6 +379,7 @@ def generate(
     resolution: str = "2K",
     no_images: bool = False,
     backend: str | None = None,
+    style: str = DEFAULT_STYLE,
 ) -> bool:
     """Komplette Pipeline: SVG → Tavily → Kie.ai/Gemini → PNG."""
     backend = backend or PRETTYDIAGRAMS_BACKEND
@@ -341,7 +398,7 @@ def generate(
                     logger.info("Referenzbild geladen: %s", result["query"])
 
     # 2. Prompt bauen
-    prompt = build_prompt(svg_content, extra_prompt)
+    prompt = build_prompt(svg_content, extra_prompt, style=style)
     logger.info("Prompt: %d Zeichen, %d Referenzbilder", len(prompt), len(reference_images))
 
     # 3. Rendering (primary backend with fallback)
@@ -398,6 +455,7 @@ def main():
     parser.add_argument("-o", "--output", type=str, default="output/diagram.png", help="Output-Pfad (default: output/diagram.png)")
     parser.add_argument("--aspect-ratio", type=str, default="16:9", help="Seitenverhältnis (default: 16:9)")
     parser.add_argument("--resolution", type=str, default="2K", choices=["1K", "2K", "4K"], help="Auflösung (default: 2K)")
+    parser.add_argument("--style", type=str, choices=list(STYLE_PROMPTS.keys()), default=DEFAULT_STYLE, help="Rendering-Style/Preset (default: sketchnote)")
     parser.add_argument("--backend", type=str, choices=["kie", "gemini"], help="Rendering-Backend (default: PRETTYDIAGRAMS_BACKEND oder kie)")
     parser.add_argument("--no-images", action="store_true", help="Keine Tavily-Bildersuche")
     args = parser.parse_args()
@@ -405,17 +463,17 @@ def main():
     if not args.svg and not args.prompt:
         parser.error("--svg oder --prompt ist erforderlich")
 
+    svg_content = None
     if args.svg:
         svg_path = Path(args.svg)
         if not svg_path.exists():
             logger.error("SVG-Datei nicht gefunden: %s", svg_path)
             sys.exit(1)
         svg_content = svg_path.read_text()
-    else:
-        # Wenn nur --prompt gegeben: minimales SVG als Wrapper
+    elif args.style == "sketchnote":
         svg_content = f"""\
 <svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
-  <!-- Placeholder SVG — Nano Banana Pro will generate from prompt -->
+  <!-- Placeholder SVG -->
   <text x="450" y="275" text-anchor="middle" font-size="24">{xml_escape(args.prompt)}</text>
 </svg>"""
 
@@ -429,6 +487,7 @@ def main():
         resolution=args.resolution,
         no_images=args.no_images,
         backend=args.backend,
+        style=args.style,
     )
 
     if success:
