@@ -7,4 +7,3 @@ __pycache__/
 output/
 data/
 .claude/
-.gitlab-ci.yml
