@@ -38,13 +38,13 @@ pip install -r requirements.txt
 Create a `.env` file:
 
 ```bash
-# Option A: Kie.ai (~$0.09/image)
-PRETTYDIAGRAMS_BACKEND=kie
-KIE_API_KEY=your-key-here
-
-# Option B: Google Gemini (free tier available)
+# Option A: Google Gemini (recommended, free tier available)
 PRETTYDIAGRAMS_BACKEND=gemini
 GEMINI_API_KEY=your-key-here
+
+# Option B: Kie.ai (~$0.09/image)
+PRETTYDIAGRAMS_BACKEND=kie
+KIE_API_KEY=your-key-here
 
 # Optional: reference image search
 TAVILY_API_KEY=your-key-here
@@ -94,14 +94,14 @@ ViewBox is always `0 0 900 550`. Max 8 containers. See [svg-rules.md](skills/pre
 
 ## Backends
 
-Both backends use the same underlying model (Nano Banana Pro / gemini-3-pro-image-preview):
+Both backends use the same underlying model (Nano Banana Pro / gemini-3-pro-image-preview). If both API keys are configured, the primary backend is tried first. On failure, the other is used as fallback.
 
-| | Kie.ai | Google Gemini |
+| | Google Gemini (default) | Kie.ai |
 |---|---|---|
-| API Key | `KIE_API_KEY` | `GEMINI_API_KEY` |
-| Pricing | 18 credits (~$0.09) / image | Google AI free tier / pay-as-you-go |
-| Model | `nano-banana-pro` | `gemini-3-pro-image-preview` |
-| Model override | — | `GEMINI_MODEL` env var |
+| API Key | `GEMINI_API_KEY` | `KIE_API_KEY` |
+| Pricing | Google AI free tier / pay-as-you-go | 18 credits (~$0.09) / image |
+| Model | `gemini-3-pro-image-preview` | `nano-banana-pro` |
+| Model override | `GEMINI_MODEL` env var | — |
 
 ## Integration
 

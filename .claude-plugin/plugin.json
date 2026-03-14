@@ -1,11 +1,11 @@
 {
   "name": "prettydiagrams",
-  "description": "Generate hand-drawn sketchnote diagrams from text descriptions using SVG blueprints and Kie.ai rendering",
-  "version": "1.0.0",
+  "description": "Generate hand-drawn sketchnote diagrams from text descriptions using SVG blueprints rendered via Google Gemini or Kie.ai (with automatic fallback)",
+  "version": "1.2.0",
   "author": {
     "name": "jadefalkner"
   },
   "repository": "https://github.com/jadefalkner/prettydiagrams",
   "license": "MIT",
-  "keywords": ["diagrams", "svg", "sketchnote", "illustration", "kie.ai"]
+  "keywords": ["diagrams", "svg", "sketchnote", "illustration", "gemini", "kie.ai"]
 }
