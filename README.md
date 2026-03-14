@@ -53,7 +53,7 @@ TAVILY_API_KEY=your-key-here
 Render a diagram:
 
 ```bash
-python generate.py --svg examples/a2a-architecture.svg -o output.png
+python generate.py --svg examples/prettydiagrams-workflow.svg -o output.png
 python generate.py --prompt "How Kubernetes networking works" -o output.png
 ```
 
